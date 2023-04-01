@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvFulanDsn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/baloo2_semibold"
+        android:text="Selamat Datang Fulan,"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_tglDsn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/baloo2_medium"
+        android:text="14 Maret 2002"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFulanDsn" />
+
+    <ImageView
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toEndOf="@+id/tvFulanDsn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_tambahMhs"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/button"
+        android:backgroundTint="@color/color_button"
+        android:text="Tambah Data Mahasiswa"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tglDsn"
+        android:paddingEnd="20dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_mhs"
+        android:layout_width="165dp"
+        android:layout_height="204dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="170dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#CCB6978F"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="79dp"
+            android:layout_height="120dp"
+            android:fontFamily="@font/baloo2_extrabold"
+            android:text="24"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="70sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="39dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mahasiswa"
+            android:fontFamily="@font/baloo2_medium"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="110dp"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_hadir"
+        android:layout_width="138dp"
+        android:layout_height="204dp"
+        android:layout_marginTop="170dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#CC844435"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="79dp"
+            android:layout_height="120dp"
+            android:fontFamily="@font/baloo2_extrabold"
+            android:text="18"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="70sp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hadir"
+            android:textAlignment="center"
+            android:fontFamily="@font/baloo2_medium"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="110dp"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_absen"
+        android:layout_width="165dp"
+        android:layout_height="204dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#CCDA9E90"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_hadir">
+
+        <TextView
+            android:layout_width="79dp"
+            android:layout_height="120dp"
+            android:fontFamily="@font/baloo2_extrabold"
+            android:text="2"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="70sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="38dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Absen"
+            android:fontFamily="@font/baloo2_medium"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="110dp"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_izin"
+        android:layout_width="138dp"
+        android:layout_height="204dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#CC9F1E00"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_mhs">
+
+        <TextView
+            android:layout_width="79dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="38dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/baloo2_bold"
+            android:text="4"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="70sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="110dp"
+            android:fontFamily="@font/baloo2_medium"
+            android:text="Izin"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

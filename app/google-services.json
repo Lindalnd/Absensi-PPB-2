@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "769227779472",
+    "project_id": "checkinmotion",
+    "storage_bucket": "checkinmotion.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769227779472:android:85d73424653073a92bd715",
+        "android_client_info": {
+          "package_name": "com.lindainaya.absensippb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "769227779472-dhf55fts0ag75b50fl494gi4etqrerl3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lindainaya.absensippb",
+            "certificate_hash": "cae5a52e7db888ef908b4e6013222d9909d4d81c"
+          }
+        },
+        {
+          "client_id": "769227779472-9u7r993kcscbsftqqdprj664pt6ls12j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrLbrZhtswpkYxcFbheMgs_Q-hg8LBfJs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "769227779472-9u7r993kcscbsftqqdprj664pt6ls12j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
