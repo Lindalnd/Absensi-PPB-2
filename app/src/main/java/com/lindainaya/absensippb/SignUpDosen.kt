@@ -23,43 +23,43 @@ class SignUpDosen : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        binding.btnAddmhs.setOnClickListener {
-            val nama = binding.edtNamaMhs.text.toString()
-            val nim = binding.edtNimmhs.text.toString()
-            val email = binding.edtEmailMhs.text.toString()
-            val phone = binding.noHandpMhs.text.toString()
-            val password = binding.PasswordMhs.text.toString()
+        binding.btnSignUp.setOnClickListener {
+            val nama = binding.edtNamaDsn.text.toString()
+            val nip = binding.edtNipDsn.text.toString()
+            val email = binding.edtEmailDsn.text.toString()
+            val phone = binding.noHandpDsn.text.toString()
+            val password = binding.PasswordDsn.text.toString()
 
             //validasi nama, nim,no hp, password, email
             if (nama.isEmpty()){
-                binding.edtNamaMhs.error = "Nama Harus Diisi"
-                binding.edtNamaMhs.requestFocus()
+                binding.edtNamaDsn.error = "Nama Harus Diisi"
+                binding.edtNamaDsn.requestFocus()
                 return@setOnClickListener
             }
-            if (nim.isEmpty()){
-                binding.edtNimmhs.error = "NIM Harus Diisi"
-                binding.edtNimmhs.requestFocus()
+            if (nip.isEmpty()){
+                binding.edtNipDsn.error = "NIM Harus Diisi"
+                binding.edtNipDsn.requestFocus()
                 return@setOnClickListener
             }
             if (email.isEmpty()){
-                binding.edtEmailMhs.error = "Email Harus Diisi"
-                binding.edtEmailMhs.requestFocus()
+                binding.edtEmailDsn.error = "Email Harus Diisi"
+                binding.edtEmailDsn.requestFocus()
                 return@setOnClickListener
             }
             //validasi email tdk sesuai
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                binding.edtEmailMhs.error = "Email Tidak Valid"
-                binding.edtEmailMhs.requestFocus()
+                binding.edtEmailDsn.error = "Email Tidak Valid"
+                binding.edtEmailDsn.requestFocus()
                 return@setOnClickListener
             }
             if (phone.isEmpty()){
-                binding.noHandpMhs.error = "No.Hp Harus Diisi"
-                binding.noHandpMhs.requestFocus()
+                binding.noHandpDsn.error = "No.Hp Harus Diisi"
+                binding.noHandpDsn.requestFocus()
                 return@setOnClickListener
             }
             if (password.isEmpty()){
-                binding.PasswordMhs.error = "Password Harus Diisi"
-                binding.PasswordMhs.requestFocus()
+                binding.PasswordDsn.error = "Password Harus Diisi"
+                binding.PasswordDsn.requestFocus()
                 return@setOnClickListener
             }
             RegisterFirebase(email,password)
