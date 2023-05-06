@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -48,6 +49,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             LoginFirebase(email, password)
+            binding.loading.visibility = View.VISIBLE
         }
     }
 
