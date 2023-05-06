@@ -15,6 +15,34 @@
         android:theme="@style/Theme.AbsensiPPB"
         tools:targetApi="31">
         <activity
+            android:name=".DaftarMahasiswaAbsen"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DaftarMahasiswaIzin"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DaftarMahasiswaHadir"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DaftarMahasiswa"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".SelectCategory"
             android:exported="false">
             <meta-data
