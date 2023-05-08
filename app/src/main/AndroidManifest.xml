@@ -15,6 +15,21 @@
         android:theme="@style/Theme.AbsensiPPB"
         tools:targetApi="31">
         <activity
+            android:name=".HistoryMahasiswa"
+            android:exported="false" />
+        <activity
+            android:name=".JadwalMahasiswaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditProfilMahasiswa"
+            android:exported="false" />
+        <activity
+            android:name=".ProfilMahasiswa"
+            android:exported="false" />
+        <activity
+            android:name=".HomePageMahasiswa"
+            android:exported="false" />
+        <activity
             android:name=".FormAbsensiActivity"
             android:exported="false" />
         <activity
