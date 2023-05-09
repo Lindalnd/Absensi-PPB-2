@@ -6,4 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".HistoryMahasiswa">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarRiwayatMhs"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#F9F6E0">
+
+        <ImageView
+            android:id="@+id/imgBack4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="5dp"
+            android:text="Riwayat"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarRiwayatMhs">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcDaftarMhsHadir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_hadir"/>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
