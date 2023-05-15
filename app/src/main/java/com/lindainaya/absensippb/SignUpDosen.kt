@@ -1,13 +1,17 @@
 package com.lindainaya.absensippb
 
+import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.util.Patterns
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -16,17 +20,24 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask.TaskSnapshot
 import com.google.firebase.storage.ktx.storage
 import com.lindainaya.absensippb.databinding.ActivitySignUpDosenBinding
-
+import java.io.ByteArrayOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class SignUpDosen : AppCompatActivity() {
-    lateinit var binding : ActivitySignUpDosenBinding
-    lateinit var  auth : FirebaseAuth
-    lateinit var db : FirebaseFirestore
+    lateinit var binding: ActivitySignUpDosenBinding
+    lateinit var auth: FirebaseAuth
+    lateinit var db: FirebaseFirestore
     private var storageRef = Firebase.storage
     private val selectimage = arrayOf("Take Photo", "Choose from Gallery", "Cancel")
+    lateinit var imageuri: Uri
+    lateinit var pic: Bitmap
+    lateinit var foto :ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySignUpDosenBinding.inflate(layoutInflater)
@@ -41,121 +52,172 @@ class SignUpDosen : AppCompatActivity() {
         fun showSelectImage() {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Select Image")
-            builder.setItems(selectimage) {dialog, which ->
+            builder.setItems(selectimage) { dialog, which ->
 //                Toast.makeText(this,which.toString(), Toast.LENGTH_SHORT).show()
-                if (which.equals(0)){
-                    Toast.makeText(this,which.toString(), Toast.LENGTH_SHORT).show()
-                    if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-                        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA), 100)
-                    }else {
+                if (which.equals(0)) {
+                    Toast.makeText(this, which.toString(), Toast.LENGTH_SHORT).show()
+                    if (ActivityCompat.checkSelfPermission(
+                            this, android.Manifest.permission.CAMERA
+                        ) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                        ActivityCompat.requestPermissions(
+                            this, arrayOf(android.Manifest.permission.CAMERA), 100
+                        )
+                    } else {
                         val i = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                        startActivityForResult(i,100)
+                        startActivityForResult(i, 100)
                     }
 
-                } else if (which.equals(1)){
-                    if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-                        ActivityCompat.requestPermissions(this,arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 20)
-                    }else{
+                } else if (which.equals(1)) {
+                    if (ActivityCompat.checkSelfPermission(
+                            this, android.Manifest.permission.READ_EXTERNAL_STORAGE
+                        ) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                        ActivityCompat.requestPermissions(
+                            this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 20
+                        )
+                    } else {
                         val a = Intent(Intent.ACTION_PICK)
                         a.type = "image/*"
                         startActivityForResult(a, 20)
                     }
 
-                } else if (which.equals(3)){
+                } else if (which.equals(3)) {
                     dialog.dismiss()
                 }
             }
             builder.show()
         }
 
-        binding.imgBtn.setOnClickListener{
+        binding.imgBtn.setOnClickListener {
             showSelectImage()
         }
 
 //  menambahkan data ke firestore
         binding.btnAddmhs.setOnClickListener {
-            val nama = binding.edtNamaDsn.text.toString()
+
+            val name = binding.edtNamaDsn.text.toString()
             val nidn = binding.edtNidn.text.toString()
             val email = binding.edtEmailDsn.text.toString()
             val phone = binding.noHandpDsn.text.toString()
             val password = binding.PasswordDsn.text.toString()
+//            val image = binding.imgDosen.toString()
 
             //validasi nama, nim,no hp, password, email
-            if (nama.isEmpty()){
+            if (name.isEmpty()) {
                 binding.edtNamaDsn.error = "Nama Harus Diisi"
                 binding.edtNamaDsn.requestFocus()
-                return@setOnClickListener
             }
-            if (nidn.isEmpty()){
+            else if (nidn.isEmpty()) {
                 binding.edtNidn.error = "NIM Harus Diisi"
                 binding.edtNidn.requestFocus()
-                return@setOnClickListener
             }
-            if (email.isEmpty()){
+            else if (email.isEmpty()) {
                 binding.edtEmailDsn.error = "Email Harus Diisi"
                 binding.edtEmailDsn.requestFocus()
-                return@setOnClickListener
             }
             //validasi email tdk sesuai
-            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 binding.edtEmailDsn.error = "Email Tidak Valid"
                 binding.edtEmailDsn.requestFocus()
-                return@setOnClickListener
             }
-            if (phone.isEmpty()){
+            else if (phone.isEmpty()) {
                 binding.noHandpDsn.error = "No.Hp Harus Diisi"
                 binding.noHandpDsn.requestFocus()
-                return@setOnClickListener
             }
-            if (password.isEmpty()){
+            else if (password.isEmpty()) {
                 binding.PasswordDsn.error = "Password Harus Diisi"
                 binding.PasswordDsn.requestFocus()
-                return@setOnClickListener
             }
-            RegisterFirebase(email,password)
-
-            val dosen = hashMapOf(
-                "nama" to nama,
-                "gmail" to email,
-                "nidn" to nidn,
-                "phone" to phone,
-                "password" to password
-            )
-
-// Add a new document with a generated ID
-            db.collection("dosen")
-                .add(dosen)
-                .addOnSuccessListener { documentReference ->
-                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                }
-                .addOnFailureListener { e ->
-                    Log.w(TAG, "Error adding document", e)
-                }
+//            else if(image.isEmpty()){
+//                Toast.makeText(this,"Harap berikan Foto", Toast.LENGTH_SHORT).show()
+//            }
+            else{
+                uploadImage()
+                RegisterFirebase(email, password)
+            }
         }
     }
 
     private fun RegisterFirebase(email: String, password: String) {
-        auth.createUserWithEmailAndPassword(email,password)
-            .addOnCompleteListener(this){
-                if (it.isSuccessful){
-                    Toast.makeText(this, "Register Berhasil", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this,LoginActivity::class.java)
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) {
+                if (it.isSuccessful) {
+//                    Toast.makeText(this, "Register Berhasil", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
-                }else{
-                    Toast.makeText(this, "${it.exception?.message}" , Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(this, "${it.exception?.message}", Toast.LENGTH_LONG).show()
                 }
 
             }
 
     }
-// Menampilkan gambar
+
+    private fun uploadImage() {
+        val progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("Loading...")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+
+//        binding.imgBtn.setDrawingCacheEnabled(true)
+//        binding.imgBtn.buildDrawingCache()
+//        val bitmap = (binding.imgBtn.getDrawable() as BitmapDrawable).bitmap
+//        val baos = ByteArrayOutputStream()
+//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+//        val image: ByteArray = baos.toByteArray()
+
+        val formater = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
+        val now = Date()
+        val filename = formater.format(now)
+        val storageReference = FirebaseStorage.getInstance().getReference("images/$filename")
+        storageReference.putFile(imageuri).addOnCompleteListener { task ->
+                if (task.isSuccessful){
+                    storageReference.downloadUrl.addOnSuccessListener { uri ->
+                        val name = binding.edtNamaDsn.text.toString()
+                        val nidn = binding.edtNidn.text.toString()
+                        val email = binding.edtEmailDsn.text.toString()
+                        val phone = binding.noHandpDsn.text.toString()
+                        val password = binding.PasswordDsn.text.toString()
+
+
+                        val pic = uri.toString()
+                        val dosen = HashMap<String, Any>()
+                        dosen["nama"] = name
+                        dosen["gmail"] = email
+                        dosen["nidn"] = nidn
+                        dosen["phone"] = phone
+                        dosen["password"] = password
+                        dosen["image dosen"] = pic
+
+                        db.collection("dosen").add(dosen).addOnCompleteListener{firestoreTask ->
+
+                            if (firestoreTask.isSuccessful){
+                                Toast.makeText(this, "Uploaded Succesfully", Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(this, firestoreTask.exception?.message, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                }else{
+                    Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
+                }
+            Toast.makeText(this, "Register Berhasil" , Toast.LENGTH_SHORT).show()
+            progressDialog.dismiss()
+        }.addOnFailureListener {
+            progressDialog.dismiss()
+            Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // Menampilkan gambar
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == 100){
-            var pic : Bitmap = data?.extras?.get("data") as Bitmap
-            binding.imgBtn.setImageBitmap(pic)
-        }else if (requestCode == 20){
-            binding.imgBtn.setImageURI(data?.data)
+        if (requestCode == 100) {
+            val pic : Bitmap = data?.extras?.get("data") as Bitmap
+            binding.imgDosen.setImageBitmap(pic)
+        } else if (requestCode == 20) {
+            imageuri = data?.data!!
+            binding.imgDosen.setImageURI(imageuri)
         }
     }
 

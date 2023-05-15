@@ -10,6 +10,7 @@ import android.util.Patterns
 import android.widget.Button
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.lindainaya.absensippb.databinding.AddMahasiswaBinding
 import com.lindainaya.absensippb.ui.home.HomeFragment
 
@@ -18,6 +19,7 @@ class AddMahasiswa : AppCompatActivity() {
     lateinit var binding : AddMahasiswaBinding
     lateinit var tambah : Button
     lateinit var  auth : FirebaseAuth
+    lateinit var db : FirebaseFirestore
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +28,7 @@ class AddMahasiswa : AppCompatActivity() {
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
 
         binding.btnAddmhs.setOnClickListener {
             val nama = binding.edtNamaMhs.text.toString()
@@ -65,8 +68,27 @@ class AddMahasiswa : AppCompatActivity() {
                 binding.PasswordMhs.error = "Password Harus Diisi"
                 binding.PasswordMhs.requestFocus()
                 return@setOnClickListener
+            } else {
+                val mahasiswa = HashMap<String, Any>()
+                mahasiswa["nama"] = nama
+                mahasiswa["gmail"] = email
+                mahasiswa["nidn"] = nim
+                mahasiswa["phone"] = phone
+                mahasiswa["password"] = password
+//                mahasiswa["image dosen"] = pic
+
+                db.collection("mahasiswa").add(mahasiswa).addOnCompleteListener{firestoreTask ->
+
+                    if (firestoreTask.isSuccessful){
+                        Toast.makeText(this, "Uploaded Succesfully", Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(this, firestoreTask.exception?.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
             RegisterFirebase(email,password)
+
+
         }
     }
 
