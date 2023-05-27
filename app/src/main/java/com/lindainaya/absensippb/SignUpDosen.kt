@@ -5,28 +5,24 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.util.Patterns
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.UploadTask.TaskSnapshot
 import com.google.firebase.storage.ktx.storage
 import com.lindainaya.absensippb.databinding.ActivitySignUpDosenBinding
-import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.HashMap
 
 
 class SignUpDosen : AppCompatActivity() {
@@ -36,8 +32,9 @@ class SignUpDosen : AppCompatActivity() {
     private var storageRef = Firebase.storage
     private val selectimage = arrayOf("Take Photo", "Choose from Gallery", "Cancel")
     lateinit var imageuri: Uri
+    lateinit var userID: String
     lateinit var pic: Bitmap
-    lateinit var foto :ImageView
+    lateinit var foto: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySignUpDosenBinding.inflate(layoutInflater)
@@ -47,7 +44,6 @@ class SignUpDosen : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
         storageRef = FirebaseStorage.getInstance()
-
 
         fun showSelectImage() {
             val builder = AlertDialog.Builder(this)
@@ -101,62 +97,56 @@ class SignUpDosen : AppCompatActivity() {
             val email = binding.edtEmailDsn.text.toString()
             val phone = binding.noHandpDsn.text.toString()
             val password = binding.PasswordDsn.text.toString()
-//            val image = binding.imgDosen.toString()
+            val ttl = binding.edtTtl.text.toString()
 
             //validasi nama, nim,no hp, password, email
             if (name.isEmpty()) {
                 binding.edtNamaDsn.error = "Nama Harus Diisi"
                 binding.edtNamaDsn.requestFocus()
-            }
-            else if (nidn.isEmpty()) {
+            } else if (nidn.isEmpty()) {
                 binding.edtNidn.error = "NIM Harus Diisi"
                 binding.edtNidn.requestFocus()
-            }
-            else if (email.isEmpty()) {
+            } else if (email.isEmpty()) {
                 binding.edtEmailDsn.error = "Email Harus Diisi"
                 binding.edtEmailDsn.requestFocus()
             }
             //validasi email tdk sesuai
-            else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                binding.edtEmailDsn.error = "Email Tidak Valid"
-                binding.edtEmailDsn.requestFocus()
-            }
+//            else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+//                binding.edtEmailDsn.error = "Email Tidak Valid"
+//                binding.edtEmailDsn.requestFocus()
+//            }
             else if (phone.isEmpty()) {
                 binding.noHandpDsn.error = "No.Hp Harus Diisi"
                 binding.noHandpDsn.requestFocus()
-            }
-            else if (password.isEmpty()) {
+            } else if (password.isEmpty()) {
                 binding.PasswordDsn.error = "Password Harus Diisi"
                 binding.PasswordDsn.requestFocus()
             }
-//            else if(image.isEmpty()){
-//                Toast.makeText(this,"Harap berikan Foto", Toast.LENGTH_SHORT).show()
-//            }
-            else{
-                uploadImage()
-                RegisterFirebase(email, password)
+            else if(ttl.isEmpty()){
+                binding.edtTtl.error = "TTL Harus Diisi"
+                binding.edtTtl.requestFocus()
             }
-        }
-    }
+            else {
 
-    private fun RegisterFirebase(email: String, password: String) {
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) {
-                if (it.isSuccessful) {
-//                    Toast.makeText(this, "Register Berhasil", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, LoginActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    Toast.makeText(this, "${it.exception?.message}", Toast.LENGTH_LONG).show()
+                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) {
+                    if (it.isSuccessful) {
+                        uploadImage()
+                        val intent = Intent(this, LoginActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this, "${it.exception?.message}", Toast.LENGTH_LONG).show()
+                    }
+
                 }
 
             }
-
+        }
     }
 
     private fun uploadImage() {
         val progressDialog = ProgressDialog(this)
         progressDialog.setMessage("Loading...")
-        progressDialog.setCancelable(false)
+        progressDialog.setCancelable(/* flag = */ false)
         progressDialog.show()
 
 //        binding.imgBtn.setDrawingCacheEnabled(true)
@@ -171,37 +161,48 @@ class SignUpDosen : AppCompatActivity() {
         val filename = formater.format(now)
         val storageReference = FirebaseStorage.getInstance().getReference("images/$filename")
         storageReference.putFile(imageuri).addOnCompleteListener { task ->
-                if (task.isSuccessful){
-                    storageReference.downloadUrl.addOnSuccessListener { uri ->
-                        val name = binding.edtNamaDsn.text.toString()
-                        val nidn = binding.edtNidn.text.toString()
-                        val email = binding.edtEmailDsn.text.toString()
-                        val phone = binding.noHandpDsn.text.toString()
-                        val password = binding.PasswordDsn.text.toString()
+            if (task.isSuccessful) {
+                storageReference.downloadUrl.addOnSuccessListener { uri ->
 
+                    val name = binding.edtNamaDsn.text.toString()
+                    val nidn = binding.edtNidn.text.toString()
+                    val email = binding.edtEmailDsn.text.toString()
+                    val phone = binding.noHandpDsn.text.toString()
+                    val password = binding.PasswordDsn.text.toString()
+                    val ttl = binding.edtTtl.text.toString()
 
-                        val pic = uri.toString()
-                        val dosen = HashMap<String, Any>()
-                        dosen["nama"] = name
-                        dosen["gmail"] = email
-                        dosen["nidn"] = nidn
-                        dosen["phone"] = phone
-                        dosen["password"] = password
-                        dosen["image dosen"] = pic
+                    val pic = uri.toString()
 
-                        db.collection("dosen").add(dosen).addOnCompleteListener{firestoreTask ->
+                    userID = Objects.requireNonNull(auth.currentUser?.uid)!!
+                    val docRef: DocumentReference = db.collection("Dosen").document(userID)
+                    val dosen = hashMapOf(
+                        "nama" to name,
+                        "gmail" to email,
+                        "nidn" to nidn,
+                        "phone" to phone,
+                        "password" to password,
+                        "ttl" to ttl,
+                        "imageDosen" to pic
+                    )
+                    docRef.set(dosen).addOnSuccessListener { aVoid ->
+                        Log.d(TAG, "SUKSES : " + userID)
+                    }
 
-                            if (firestoreTask.isSuccessful){
-                                Toast.makeText(this, "Uploaded Succesfully", Toast.LENGTH_SHORT).show()
-                            }else{
-                                Toast.makeText(this, firestoreTask.exception?.message, Toast.LENGTH_SHORT).show()
-                            }
+                    db.collection("Dosen").add(dosen).addOnCompleteListener { firestoreTask ->
+
+                        if (firestoreTask.isSuccessful) {
+                            Toast.makeText(this, "Uploaded Succesfully", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(
+                                this, firestoreTask.exception?.message, Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
-                }else{
-                    Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
                 }
-            Toast.makeText(this, "Register Berhasil" , Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
+            }
+            Toast.makeText(this, "Register Berhasil", Toast.LENGTH_SHORT).show()
             progressDialog.dismiss()
         }.addOnFailureListener {
             progressDialog.dismiss()
@@ -213,7 +214,7 @@ class SignUpDosen : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 100) {
-            val pic : Bitmap = data?.extras?.get("data") as Bitmap
+            val pic: Bitmap = data?.extras?.get("data") as Bitmap
             binding.imgDosen.setImageBitmap(pic)
         } else if (requestCode == 20) {
             imageuri = data?.data!!
