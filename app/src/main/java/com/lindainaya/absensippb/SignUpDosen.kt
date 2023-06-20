@@ -5,6 +5,7 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -21,6 +22,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import com.lindainaya.absensippb.databinding.ActivitySignUpDosenBinding
+import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -149,18 +151,18 @@ class SignUpDosen : AppCompatActivity() {
         progressDialog.setCancelable(/* flag = */ false)
         progressDialog.show()
 
-//        binding.imgBtn.setDrawingCacheEnabled(true)
-//        binding.imgBtn.buildDrawingCache()
-//        val bitmap = (binding.imgBtn.getDrawable() as BitmapDrawable).bitmap
-//        val baos = ByteArrayOutputStream()
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-//        val image: ByteArray = baos.toByteArray()
+        binding.imgBtn.setDrawingCacheEnabled(true)
+        binding.imgBtn.buildDrawingCache()
+        val bitmap = (binding.imgBtn as BitmapDrawable).bitmap
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val image: ByteArray = baos.toByteArray()
 
         val formater = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
         val now = Date()
         val filename = formater.format(now)
-        val storageReference = FirebaseStorage.getInstance().getReference("images/$filename")
-        storageReference.putFile(imageuri).addOnCompleteListener { task ->
+        val storageReference = FirebaseStorage.getInstance().getReference("dosen/$filename")
+        storageReference.putBytes(image).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 storageReference.downloadUrl.addOnSuccessListener { uri ->
 
@@ -173,8 +175,10 @@ class SignUpDosen : AppCompatActivity() {
 
                     val pic = uri.toString()
 
+                    //mengambil userId
                     userID = Objects.requireNonNull(auth.currentUser?.uid)!!
                     val docRef: DocumentReference = db.collection("Dosen").document(userID)
+                    //menambahkan data ke firestore
                     val dosen = hashMapOf(
                         "nama" to name,
                         "gmail" to email,

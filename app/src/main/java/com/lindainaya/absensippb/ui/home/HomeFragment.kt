@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         uid = arguments?.getString("uid")
-        Toast.makeText(activity, "inilah$uid", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(activity, "inilah$uid", Toast.LENGTH_SHORT).show()
         db.collection("Dosen").get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 for (document: QueryDocumentSnapshot in task.result) {

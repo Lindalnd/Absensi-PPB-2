@@ -1,19 +1,8 @@
 package com.lindainaya.absensippb
 
-import android.annotation.SuppressLint
-import android.content.ContentValues
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.replace
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.lindainaya.absensippb.databinding.ActivityHomePageDosenBinding
 import com.lindainaya.absensippb.ui.home.HomeFragment
 import com.lindainaya.absensippb.ui.profile.ProfileFragment

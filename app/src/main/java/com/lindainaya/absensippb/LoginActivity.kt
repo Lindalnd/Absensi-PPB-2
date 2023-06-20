@@ -2,7 +2,6 @@ package com.lindainaya.absensippb
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -10,16 +9,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.lindainaya.absensippb.databinding.ActivityLoginBinding
-import com.lindainaya.absensippb.ui.home.HomeFragment
-import com.lindainaya.absensippb.ui.home.HomeViewModel
 
 class LoginActivity : AppCompatActivity() {
 
-    lateinit var auth: FirebaseAuth
-    lateinit var binding: ActivityLoginBinding
-    lateinit var db : FirebaseFirestore
-    val fragment = HomeFragment()
-    val bundle = Bundle()
+    private lateinit var auth: FirebaseAuth
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var db : FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -70,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
 //                    Toast.makeText(this, "ini$uid", Toast.LENGTH_SHORT).show()
 
                 } else {
-                    binding.loading.visibility
+                    binding.loading.visibility =  View.GONE
                     Toast.makeText(this, "${it.exception?.message}", Toast.LENGTH_LONG).show()
                 }
             }

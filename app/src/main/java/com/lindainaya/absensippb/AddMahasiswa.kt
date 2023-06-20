@@ -1,8 +1,6 @@
 package com.lindainaya.absensippb
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.PendingIntent.getActivity
 import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Intent
@@ -11,10 +9,8 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.util.Patterns
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -23,10 +19,8 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.lindainaya.absensippb.databinding.AddMahasiswaBinding
-import com.lindainaya.absensippb.ui.home.HomeFragment
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.HashMap
 
 class AddMahasiswa : AppCompatActivity() {
 
@@ -136,7 +130,7 @@ class AddMahasiswa : AppCompatActivity() {
         val formater = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
         val now = Date()
         val filename = formater.format(now)
-        val storageReference = FirebaseStorage.getInstance().getReference("images/$filename")
+        val storageReference = FirebaseStorage.getInstance().getReference("mahasiswa/$filename")
         storageReference.putFile(imageuri).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 storageReference.downloadUrl.addOnSuccessListener { uri ->
@@ -150,7 +144,7 @@ class AddMahasiswa : AppCompatActivity() {
                     val pic = uri.toString()
 
                     userID = Objects.requireNonNull(auth.currentUser?.uid)!!
-                    val docRef: DocumentReference = db.collection("Dosen").document(userID)
+                    val docRef: DocumentReference = db.collection("mahasiswa").document(userID)
                     val mahasiswa = hashMapOf(
                         "nama" to nama,
                         "gmail" to email,
@@ -163,18 +157,18 @@ class AddMahasiswa : AppCompatActivity() {
                         Log.d(ContentValues.TAG, "SUKSES : " + userID)
                     }
 
-                    db.collection("mahasiswa").add(mahasiswa)
-                        .addOnCompleteListener { firestoreTask ->
-
-                            if (firestoreTask.isSuccessful) {
-                                Toast.makeText(this, "Uploaded Succesfully", Toast.LENGTH_SHORT)
-                                    .show()
-                            } else {
-                                Toast.makeText(
-                                    this, firestoreTask.exception?.message, Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
+//                    db.collection("mahasiswa").add(mahasiswa)
+//                        .addOnCompleteListener { firestoreTask ->
+//
+//                            if (firestoreTask.isSuccessful) {
+//                                Toast.makeText(this, "Uploaded Succesfully", Toast.LENGTH_SHORT)
+//                                    .show()
+//                            } else {
+//                                Toast.makeText(
+//                                    this, firestoreTask.exception?.message, Toast.LENGTH_SHORT
+//                                ).show()
+//                            }
+//                        }
                 }
             } else {
                 Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()

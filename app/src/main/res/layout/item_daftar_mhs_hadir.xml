@@ -18,7 +18,7 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/dateHadir"
+            android:id="@+id/dateHadirHdr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/baloo2_medium"
@@ -29,7 +29,7 @@
             card_view:layout_constraintTop_toTopOf="parent" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imgMhs"
+            android:id="@+id/imgMhsHdr"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginVertical="10dp"
@@ -44,11 +44,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             card_view:layout_constraintBaseline_toBottomOf="parent"
-            card_view:layout_constraintStart_toEndOf="@+id/imgMhs"
-            card_view:layout_constraintTop_toBottomOf="@+id/dateHadir">
+            card_view:layout_constraintStart_toEndOf="@+id/imgMhsHdr"
+            card_view:layout_constraintTop_toBottomOf="@+id/dateHadirHdr">
 
             <TextView
-                android:id="@+id/namaMhs"
+                android:id="@+id/namaMhsHdr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -58,7 +58,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/nimMhs"
+                android:id="@+id/nimMhsHdr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -79,51 +79,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:padding="10dp"-->
-<!--        android:orientation="vertical">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/dateHadir"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Sabtu, 06 Mei 2023 09:20 WIB"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:fontFamily="@font/baloo2_semibold"-->
-<!--            android:textSize="20sp"/>-->
-
-<!--        <de.hdodenhof.circleimageview.CircleImageView-->
-<!--            android:id="@+id/imgMhs"-->
-<!--            android:layout_width="70dp"-->
-<!--            android:layout_height="70dp"-->
-<!--            tools:src="@tools:sample/avatars"/>-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical">-->
-<!--            <TextView-->
-<!--                android:id="@+id/namaMhs"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Inayatul Maula"-->
-<!--                android:layout_marginStart="30dp"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:fontFamily="@font/baloo2_semibold"-->
-<!--                android:textSize="20sp"/>-->
-<!--            <TextView-->
-<!--                android:id="@+id/nimMhs"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="2021400243"-->
-<!--                android:layout_marginStart="30dp"-->
-<!--                android:fontFamily="@font/baloo2_medium"-->
-<!--                android:textSize="20sp"/>-->
-<!--        </LinearLayout>-->
-
-<!--    </LinearLayout>-->
 
 
 
