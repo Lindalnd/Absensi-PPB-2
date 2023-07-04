@@ -191,6 +191,8 @@ class FormAbsensiActivity : AppCompatActivity() {
                 Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
             }
             Toast.makeText(this, "Absensi Berhasil" , Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, HomePageMahasiswa::class.java)
+            startActivity(intent)
             progressDialog.dismiss()
         }.addOnFailureListener {
             progressDialog.dismiss()
