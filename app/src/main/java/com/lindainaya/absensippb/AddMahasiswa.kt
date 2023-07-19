@@ -28,32 +28,32 @@ class AddMahasiswa : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         binding.btnAddmhs.setOnClickListener {
-            val nama = binding.edtNamaMhs.text.toString()
-            val nim = binding.edtNimmhs.text.toString()
-            val email = binding.edtEmailMhs.text.toString()
+            val nama = binding.edNamaMhs.text.toString()
+            val nim = binding.edNimMhs.text.toString()
+            val email = binding.edTgl.text.toString()
             val phone = binding.noHandpMhs.text.toString()
             val password = binding.PasswordMhs.text.toString()
 
             //validasi nama, nim,no hp, password, email
             if (nama.isEmpty()){
-                binding.edtNamaMhs.error = "Nama Harus Diisi"
-                binding.edtNamaMhs.requestFocus()
+                binding.edNamaMhs.error = "Nama Harus Diisi"
+                binding.edNamaMhs.requestFocus()
                 return@setOnClickListener
             }
             if (nim.isEmpty()){
-                binding.edtNimmhs.error = "NIM Harus Diisi"
-                binding.edtNimmhs.requestFocus()
+                binding.edNimMhs.error = "NIM Harus Diisi"
+                binding.edNimMhs.requestFocus()
                 return@setOnClickListener
             }
             if (email.isEmpty()){
-                binding.edtEmailMhs.error = "Email Harus Diisi"
-                binding.edtEmailMhs.requestFocus()
+                binding.edTgl.error = "Email Harus Diisi"
+                binding.edTgl.requestFocus()
                 return@setOnClickListener
             }
             //validasi email tdk sesuai
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                binding.edtEmailMhs.error = "Email Tidak Valid"
-                binding.edtEmailMhs.requestFocus()
+                binding.edTgl.error = "Email Tidak Valid"
+                binding.edTgl.requestFocus()
                 return@setOnClickListener
             }
             if (phone.isEmpty()){

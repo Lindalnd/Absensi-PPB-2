@@ -16,9 +16,8 @@ class SelectCategory : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnCategoryMhs.setOnClickListener {
-            Toast.makeText(this, "Maaf masih dalam proses" , Toast.LENGTH_SHORT).show()
-//            val loginMhs = Intent(this, LoginActivity::class.java)
-//            startActivity(loginMhs)
+            val loginMhs = Intent(this, LoginMhsActivity::class.java)
+            startActivity(loginMhs)
         }
         binding.btnCategoryDsn.setOnClickListener {
             val loginDsn = Intent(this, LoginActivity::class.java)
