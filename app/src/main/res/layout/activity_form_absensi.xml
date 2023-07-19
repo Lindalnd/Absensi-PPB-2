@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddMahasiswa">
+    tools:context=".FormAbsensiActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:background="#F9F6E0">
 
             <ImageView
-                android:id="@+id/imgBack1"
+                android:id="@+id/imgBack2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/back" />
@@ -26,55 +26,62 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="100dp"
                 android:paddingTop="5dp"
-                android:text="Tambah Mahasiswa"
+                android:text="Absensi Mahasiswa"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
         </androidx.appcompat.widget.Toolbar>
-        
-        <RelativeLayout
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button"
-            android:backgroundTint="#F4F4F4"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="20dp">
+            android:layout_height="45dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="#BEA87C"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            app:cardCornerRadius="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/warning"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="15dp"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Upload Foto Mahasiswa"
+                android:layout_marginLeft="55dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="20dp"
+                android:fontFamily="@font/inter"
+                android:text="Absen Harus Foto Selfie Dulu Ya !!"
                 android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textSize="16sp"/>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@drawable/kotak"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="20dp">
 
             <ImageView
-                android:id="@+id/img_mahasiswa"
+                android:id="@+id/img_btnForm"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="130dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="130dp"
-                android:src="@drawable/add_image" />
-
-            <Button
-                android:id="@+id/img_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginTop="140dp"
-                android:layout_marginEnd="130dp"
-                android:layout_marginBottom="10dp"
-                android:text="upload image"
-                android:textSize="10sp" />
+                android:src="@drawable/camera_24" />
 
         </RelativeLayout>
 
@@ -92,10 +99,10 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/baloo2_semibold"
-                android:text="Nama Mahasiswa"
-                android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/baloo2_semibold"
+                android:text="Nama Anda"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -140,10 +147,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/baloo2_semibold"
-                android:text="E-Mail"
-                android:layout_marginTop="175dp"
                 android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="175dp"
+                android:fontFamily="@font/baloo2_semibold"
+                android:text="Tanggal &amp; Waktu"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -152,34 +159,10 @@
                 android:id="@+id/edTgl"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/kotak2"
+                android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="210dp"
-                android:layout_marginHorizontal="20dp"
-                android:hint="Masukkan E-Mail"
-                android:inputType="text"
-                android:paddingStart="14dp"
-                android:textSize="16sp"
-                tools:ignore="RtlSymmetry" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/baloo2_semibold"
-                android:text="Ho. Hp"
-                android:layout_marginTop="260dp"
-                android:layout_marginHorizontal="20dp"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/noHandp_mhs"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="290dp"
-                android:layout_marginHorizontal="20dp"
                 android:background="@drawable/kotak2"
-                android:hint="Masukkan No.HP"
+                android:hint="22-07-2023"
                 android:inputType="text"
                 android:paddingStart="14dp"
                 android:textSize="16sp"
@@ -188,37 +171,47 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/baloo2_semibold"
-                android:text="Password"
-                android:layout_marginTop="340dp"
                 android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="265dp"
+                android:fontFamily="@font/baloo2_semibold"
+                android:text="Keterangan"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+            <RadioGroup
+                android:id="@+id/rgAbsen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidth="0.8dp"
-                android:layout_marginTop="370dp"
-                app:passwordToggleEnabled="true">
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="300dp"
+                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/Password_mhs"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="370dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:inputType="textPassword"
-                    android:paddingStart="14dp"
-                    android:autofillHints="Password"
-                    android:textSize="18sp"
-                    tools:ignore="RtlSymmetry"
-                    android:layout_marginBottom="20dp"
-                    android:importantForAccessibility="no"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                <RadioButton
+                    android:id="@+id/radio_Hadir"
+                    android:layout_width="104dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    android:paddingLeft="5dp"
+                    android:text="Hadir" />
+
+                <RadioButton
+                    android:id="@+id/radio_izin"
+                    android:layout_width="104dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    android:paddingLeft="5dp"
+                    android:text="Izin" />
+
+                <RadioButton
+                    android:id="@+id/radio_late"
+                    android:layout_width="104dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter"
+                    android:paddingLeft="5dp"
+                    android:text="Telat" />
+            </RadioGroup>
 
         </androidx.cardview.widget.CardView>
 
@@ -226,7 +219,7 @@
             android:id="@+id/btn_addmhs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TAMBAH MAHASISWA"
+            android:text="TAMBAH"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:background="@drawable/button"
@@ -235,7 +228,8 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"/>
-        
+
     </LinearLayout>
+
 
 </ScrollView>
