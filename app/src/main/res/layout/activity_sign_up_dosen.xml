@@ -35,31 +35,13 @@
                 android:textSize="20sp" />
         </androidx.appcompat.widget.Toolbar>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@drawable/kotak"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="20dp">
-
-            <ImageView
-                android:id="@+id/img_btn"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentBottom="true"
-                android:src="@drawable/add_image" />
-
-        </RelativeLayout>
-
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             app:cardCornerRadius="10dp"
+            android:layout_marginTop="10dp"
             app:cardElevation="10dp"
             app:layout_constraintTop_toTopOf="parent"
             android:backgroundTint="@color/white">
@@ -68,6 +50,11 @@
                 android:id="@+id/nameDsn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
+                android:fontFamily="@font/baloo2_semibold"
+                android:text="Nama Dosen"
+                android:layout_marginTop="10dp"
+
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/baloo2_semibold"
@@ -101,6 +88,8 @@
                 android:textStyle="bold" />
 
             <EditText
+
+                android:id="@+id/edt_nidn"
                 android:id="@+id/edt_nipDsn"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -165,8 +154,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/baloo2_semibold"
-                android:text="Password"
+                android:text="Tempat, Tanggal Lahir"
                 android:layout_marginTop="340dp"
+                android:layout_marginHorizontal="20dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edt_ttl"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/kotak2"
+                android:layout_marginTop="370dp"
+                android:layout_marginHorizontal="20dp"
+                android:hint="Masukkan TTL"
+                android:inputType="text"
+                android:paddingStart="14dp"
+                android:textSize="16sp"
+                tools:ignore="RtlSymmetry" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/baloo2_semibold"
+                android:text="Password"
+                android:layout_marginTop="430dp"
                 android:layout_marginHorizontal="20dp"
                 android:textColor="@color/black"
                 android:textSize="15sp"
@@ -178,7 +191,7 @@
                 android:layout_height="wrap_content"
                 app:boxStrokeColor="@color/black"
                 app:boxStrokeWidth="0.8dp"
-                android:layout_marginTop="370dp"
+                android:layout_marginTop="450dp"
                 app:passwordToggleEnabled="true">
                 <EditText
                     android:id="@+id/Password_Dsn"
@@ -194,6 +207,33 @@
                     android:layout_marginBottom="20dp"
                     android:importantForAccessibility="no"/>
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/baloo2_semibold"
+                android:text="upload Foto"
+                android:layout_marginTop="520dp"
+                android:layout_marginHorizontal="20dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/img_dosen"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="550dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/add_image" />
+            <Button
+                android:id="@+id/img_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="upload image"
+                android:layout_marginTop="650dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center_horizontal"/>
 
         </androidx.cardview.widget.CardView>
 

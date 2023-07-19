@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="4dp"
+    android:backgroundTint="#66D9D9D9"
+    card_view:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgMhs"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            tools:src="@tools:sample/avatars"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/namaMhs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Inayatul Maula"
+                android:layout_marginStart="30dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/baloo2_semibold"
+                android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/nimMhs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2021400243"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/baloo2_medium"
+                android:textSize="20sp"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+</androidx.cardview.widget.CardView>

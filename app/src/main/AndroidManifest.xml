@@ -4,11 +4,16 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-feature android:name="android.hardware.camera"
         android:required="true"/>
     <uses-feature android:name="android.hardware.camera.autofocus"/>
+
 
     <application
         android:allowBackup="true"
@@ -21,6 +26,42 @@
         android:theme="@style/Theme.AbsensiPPB"
         tools:targetApi="31">
         <activity
+
+            android:name=".Dosen.EditProfilActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Dosen.DaftarMahasiswaAbsen"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Dosen.DaftarMahasiswaIzin"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Dosen.DaftarMahasiswaHadir"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Dosen.DaftarMahasiswa"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
             android:name=".AddJadwalActivity"
             android:exported="false" />
         <activity
@@ -41,6 +82,7 @@
         <activity
             android:name=".LoginMhsActivity"
             android:exported="false" />
+
         <activity
             android:name=".SelectCategory"
             android:exported="false">
@@ -63,6 +105,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".AddMahasiswa"
             android:exported="false">
@@ -88,7 +131,8 @@
 
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="" />
+                android:value=".HomeFragment" />
+
         </activity>
 
         <meta-data
