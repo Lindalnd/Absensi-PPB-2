@@ -28,7 +28,7 @@ class DaftarMahasiswaHadir : AppCompatActivity() {
 
         db = FirebaseFirestore.getInstance()
 
-        db.collection("Absensi").get().addOnSuccessListener {
+        db.collection("Hadir").get().addOnSuccessListener {
             if (!it.isEmpty){
                 for (data in it.documents){
                     val mhshadir : Presensi? = data.toObject(Presensi::class.java)
