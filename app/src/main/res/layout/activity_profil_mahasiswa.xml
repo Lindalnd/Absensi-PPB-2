@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.ProfileFragment">
-
+    tools:context=".ProfilMahasiswa">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarProfil"
@@ -52,25 +51,26 @@
                 android:layout_marginTop="30dp"/>
 
             <TextView
-                android:id="@+id/name_profil"
+                android:id="@+id/profilNameMhs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fulanah, M.Kom."
-                android:gravity="center_horizontal"
                 android:layout_marginTop="15dp"
-                android:textSize="20sp"
                 android:fontFamily="@font/baloo2_medium"
-                android:textColor="@color/black"/>
+                android:gravity="center_horizontal"
+                android:text="Fulan Bin Fulan"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
             <TextView
-                android:id="@+id/gmail_profil"
+                android:id="@+id/profil_EmailMhs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fulanah123@gmail.com"
-                android:gravity="center_horizontal"
                 android:layout_marginTop="3dp"
-                android:textSize="15sp"
                 android:fontFamily="@font/baloo2_regular"
-                android:textColor="@color/black"/>
+                android:gravity="center_horizontal"
+                android:text="Fulan123@gmail.com"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <!--    Nidn-->
             <androidx.cardview.widget.CardView
@@ -98,12 +98,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="NIDN"
-                        android:textColor="#6E6C6C"
-                        android:fontFamily="@font/baloo2_semibold"/>
+                        android:fontFamily="@font/baloo2_semibold"
+                        android:text="NIM"
+                        android:textColor="#6E6C6C" />
 
                     <TextView
-                        android:id="@+id/nidn_profil"
+                        android:id="@+id/nim_profil"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
@@ -146,7 +146,7 @@
                         android:fontFamily="@font/baloo2_semibold"/>
 
                     <TextView
-                        android:id="@+id/noTelp_profil"
+                        android:id="@+id/noTelp_profilMhs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
@@ -189,7 +189,7 @@
                         android:fontFamily="@font/baloo2_semibold"/>
 
                     <TextView
-                        android:id="@+id/ttl_profil"
+                        android:id="@+id/ttl_profilMhs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
@@ -224,7 +224,7 @@
                     android:layout_marginEnd="17dp">
 
                     <TextView
-                        android:id="@+id/editProfil_profil"
+                        android:id="@+id/editProfil_Mhs"
                         android:layout_width="320dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
@@ -266,7 +266,7 @@
                     android:layout_marginEnd="17dp">
 
                     <TextView
-                        android:id="@+id/hubungikami_Profil"
+                        android:id="@+id/hubungikami_ProfilMhs"
                         android:layout_width="320dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
@@ -308,7 +308,7 @@
                     android:layout_marginEnd="17dp">
 
                     <TextView
-                        android:id="@+id/logout_profil"
+                        android:id="@+id/logout_profilMhs"
                         android:layout_width="320dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
@@ -331,6 +331,5 @@
 
 
     </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

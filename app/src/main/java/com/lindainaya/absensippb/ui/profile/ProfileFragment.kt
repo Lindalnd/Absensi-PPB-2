@@ -36,6 +36,7 @@ class ProfileFragment : Fragment() {
         val root: View = binding.root
 
 
+
         uid = arguments?.getString("uid")
 
         binding.editProfil.setOnClickListener {
@@ -77,6 +78,11 @@ class ProfileFragment : Fragment() {
 
             }
         }
+
+//        val textView: TextView = binding.textNotifications
+//        notificationsViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
         return root
     }
 

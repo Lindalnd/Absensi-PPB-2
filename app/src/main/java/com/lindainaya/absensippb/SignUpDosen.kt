@@ -91,6 +91,7 @@ class SignUpDosen : AppCompatActivity() {
             showSelectImage()
         }
 
+
 //  menambahkan data ke firestore
         binding.btnAddmhs.setOnClickListener {
 
@@ -140,6 +141,46 @@ class SignUpDosen : AppCompatActivity() {
                     }
 
                 }
+
+
+        binding.btnSignUp.setOnClickListener {
+            val nama = binding.edtNamaDsn.text.toString()
+            val nip = binding.edtNipDsn.text.toString()
+            val email = binding.edtEmailDsn.text.toString()
+            val phone = binding.noHandpDsn.text.toString()
+            val password = binding.PasswordDsn.text.toString()
+
+            //validasi nama, nim,no hp, password, email
+            if (nama.isEmpty()){
+                binding.edtNamaDsn.error = "Nama Harus Diisi"
+                binding.edtNamaDsn.requestFocus()
+                return@setOnClickListener
+            }
+            if (nip.isEmpty()){
+                binding.edtNipDsn.error = "NIM Harus Diisi"
+                binding.edtNipDsn.requestFocus()
+                return@setOnClickListener
+            }
+            if (email.isEmpty()){
+                binding.edtEmailDsn.error = "Email Harus Diisi"
+                binding.edtEmailDsn.requestFocus()
+                return@setOnClickListener
+            }
+            //validasi email tdk sesuai
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                binding.edtEmailDsn.error = "Email Tidak Valid"
+                binding.edtEmailDsn.requestFocus()
+                return@setOnClickListener
+            }
+            if (phone.isEmpty()){
+                binding.noHandpDsn.error = "No.Hp Harus Diisi"
+                binding.noHandpDsn.requestFocus()
+                return@setOnClickListener
+            }
+            if (password.isEmpty()){
+                binding.PasswordDsn.error = "Password Harus Diisi"
+                binding.PasswordDsn.requestFocus()
+                return@setOnClickListener
 
             }
         }
